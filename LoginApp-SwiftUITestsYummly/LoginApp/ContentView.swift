@@ -92,7 +92,7 @@ struct Login: View {
                         
                         TextField("Email Address", text: self.$email)
                             .accessibilityLabel(/*@START_MENU_TOKEN@*/"Label"/*@END_MENU_TOKEN@*/)
-                            .accessibilityIdentifier("email")
+                            .accessibilityIdentifier("login_username")
                             .colorMultiply(Color("Color1"))
                             
                             
@@ -112,7 +112,7 @@ struct Login: View {
                         SecureField ("Password", text: self.$pass)
                             .accessibilityLabel("Label")
                             .colorMultiply(Color("Color1"))
-                            .accessibilityIdentifier("pass")
+                            .accessibilityIdentifier("login_password")
                             
                             
                     }
@@ -187,6 +187,7 @@ struct Signup: View {
                             .foregroundColor(self.index == 1 ? .white : .gray)
                             .font(.title2)
                             .fontWeight(.bold)
+                            
                         
                         Capsule()
                             .fill(self.index == 1 ? Color.orange : Color.clear)
@@ -194,6 +195,7 @@ struct Signup: View {
                     }
                 }
                 .padding(.top, 30)
+                .accessibilityIdentifier("tap_singup")
                 
                     //Email Field
                 VStack {
@@ -203,7 +205,7 @@ struct Signup: View {
                         
                         TextField("Email Address", text: self.$email)
                             .colorMultiply(Color("Color1"))
-                            .accessibilityIdentifier("email2")
+                            .accessibilityIdentifier("singUp_username")
                     }
                     
                     Divider().background(Color.white.opacity(0.5))
@@ -219,7 +221,7 @@ struct Signup: View {
                         
                         SecureField ("Password", text: self.$pass)
                             .colorMultiply(Color("Color1"))
-                            .accessibilityIdentifier("pass2")
+                            .accessibilityIdentifier("singUp_password")
                     }
                     
                     Divider().background(Color.white.opacity(0.2))
@@ -235,7 +237,7 @@ struct Signup: View {
                         
                         SecureField ("Password", text: self.$repass)
                             .colorMultiply(Color("Color1"))
-                            .accessibilityIdentifier("repass")
+                            .accessibilityIdentifier("singUp_rePassword")
                     }
                     
                     Divider().background(Color.white.opacity(0.5))
@@ -266,6 +268,7 @@ struct Signup: View {
                     .padding(.horizontal, 50)
                     .background(Color("Color1"))
                     .clipShape(Capsule())
+                    .accessibilityIdentifier("singUp_button")
                     .shadow(color: Color.white.opacity(0.1), radius: 5, x: 0, y: 5)
             }
             .offset(y: 25)

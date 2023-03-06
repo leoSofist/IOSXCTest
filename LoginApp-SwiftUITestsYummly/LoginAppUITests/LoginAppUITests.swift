@@ -1,9 +1,3 @@
-//
-//  LoginAppUITests.swift
-//  LoginAppUITests
-//
-//  Created by leonardo.almeida on 03/03/23.
-//
 
 import XCTest
 
@@ -23,23 +17,25 @@ final class LoginAppUITests: XCTestCase {
 
         let app = XCUIApplication()
         app.launch()
+
+//        let txtEmail = app.textFields["login_username"]
+//        txtEmail.tap()
+//        txtEmail.typeText("leonardo.almeida@sofist.co")
+//        txtEmail.typeText("\n")
+//
+//        // Escrevendo sobre o campo de senha.
+//        let txtPassword = app.secureTextFields["login_password"]
+//        txtPassword.tap()
+//        txtPassword.typeText("1234565")
+//        txtPassword.typeText("\n")
+//
+//        // Clicando sobre o botao continuar
+//        let btn_login = app.buttons["login_button"]
+//        btn_login.tap()
         
-        let txtEmail = app.textFields["email"]
-        txtEmail.tap()
-        txtEmail.typeText("leonardo.almeida@sofist.co")
-        txtEmail.typeText("\n")
-        
-        // Escrevendo sobre o campo de senha.
-        let txtPassword = app.secureTextFields["pass"]
-        txtPassword.tap()
-        txtPassword.typeText("1234565")
-        txtPassword.typeText("\n")
-        
-        // Clicando sobre o botao continuar
-        let btn_login = app.buttons["login_button"]
-        btn_login.tap()
-        
-        
+        let btnSing = app.staticTexts["tap_singup"]
+        btnSing.tap()
+           
 
         
     }
