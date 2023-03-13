@@ -1,0 +1,35 @@
+{
+  "configurations" : [
+    {
+      "id" : "CF9E20CA-821F-4CB5-9A25-19391E69570B",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:LoginApp.xcodeproj",
+      "identifier" : "94DD6AFE27D6224000B71AA6",
+      "name" : "LoginApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "skippedTests" : [
+        "LoginAppUITests",
+        "LoginAppUITestsLaunchTests",
+        "MainUIHelper",
+        "SetupTestBase"
+      ],
+      "target" : {
+        "containerPath" : "container:LoginApp.xcodeproj",
+        "identifier" : "02A1367729B276E300794A6A",
+        "name" : "LoginAppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
