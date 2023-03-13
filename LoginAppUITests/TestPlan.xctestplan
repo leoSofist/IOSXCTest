@@ -1,0 +1,30 @@
+{
+  "configurations" : [
+    {
+      "id" : "5B9B253D-E3D3-4636-B142-9F5A5B1AB64C",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "skippedTests" : [
+        "LoginAppUITests",
+        "LoginAppUITestsLaunchTests",
+        "MainUIHelper"
+      ],
+      "target" : {
+        "containerPath" : "container:LoginApp.xcodeproj",
+        "identifier" : "02A1367729B276E300794A6A",
+        "name" : "LoginAppUITests"
+      }
+    }
+  ],
+  "version" : 1
+}

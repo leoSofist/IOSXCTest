@@ -51,10 +51,6 @@
          </ExecutionAction>
       </PreActions>
       <TestPlans>
-         <TestPlanReference
-            reference = "container:LoginAppUITests/LoginApp.xctestplan"
-            default = "YES">
-         </TestPlanReference>
       </TestPlans>
       <Testables>
          <TestableReference
