@@ -40,7 +40,6 @@
 		02B0F1A829B612C300C24CAF /* LoginStepDenifitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStepDenifitions.swift; sourceTree = "<group>"; };
 		02B0F1AA29B6136000C24CAF /* LoginTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTest.swift; sourceTree = "<group>"; };
 		02B0F1AC29B65DBE00C24CAF /* SingUpDefinitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpDefinitions.swift; sourceTree = "<group>"; };
-		02CCDF3E29BFAC90002517A3 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		94DD6AFF27D6224000B71AA6 /* LoginApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LoginApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94DD6B0227D6224000B71AA6 /* LoginAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAppApp.swift; sourceTree = "<group>"; };
 		94DD6B0427D6224000B71AA6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -76,7 +75,6 @@
 				02A1367A29B276E300794A6A /* LoginAppUITests.swift */,
 				02A1367C29B276E300794A6A /* LoginAppUITestsLaunchTests.swift */,
 				02B0F1AA29B6136000C24CAF /* LoginTest.swift */,
-				02CCDF3E29BFAC90002517A3 /* TestPlan.xctestplan */,
 			);
 			path = LoginAppUITests;
 			sourceTree = "<group>";
