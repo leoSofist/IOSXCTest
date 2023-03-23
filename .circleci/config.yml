@@ -55,7 +55,7 @@ jobs:
             --data '{
              "fields": {
               "project": {
-                "key": “TES"
+                "key": "TES"
               },
               "summary": "Issue created from CircleCI",
               "description": "This issue was created automatically after a successful test run in CircleCI.",
