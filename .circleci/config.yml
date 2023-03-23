@@ -49,7 +49,7 @@ jobs:
       - run:
           name: Verificar problemas em aberto no Jira
           command: |
-            curl -X GET -H "Content-Type: application/json" -H "Authorization: Basic ${{JIRA_API_TOKEN}}" "${{JIRA_HOST}}/rest/api/2/search?jql=project=MYPROJECT AND status=Open" 
+            curl -X GET -H "Content-Type: application/json" -H "Authorization: Basic ${{JIRA_API_TOKEN}}" "${{JIRA_HOST}}/rest/api/2/search?jql=project=TES AND status=Open" 
       
       - store_test_results:
           path: test_output
