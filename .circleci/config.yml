@@ -64,7 +64,7 @@ jobs:
               }
             }
             }' \
-            https://https://leosofist.atlassian.net/rest/api/3/issue
+            https://leosofist.atlassian.net/rest/api/3/issue
       
       - store_test_results:
           path: test_output
