@@ -50,7 +50,7 @@ jobs:
           name: Create Jira card
           command: |          
             curl -X POST \
-            -H "Authorization: Basic d34921814eea2176101598c7a24ff82f2f3dfda9" \
+            -H "Authorization: Basic ATATT3xFfGF0_b_gErz0HX28Xks2QYIwHcOX7Y_vH6Sxolojn5T-49yUwfEg0qjJ3tI0zLxabHF9t7enFgnkeFUh0PBMA63ewwsrCZJ10zNTCq52tkjQT3liGLlmoGwgko1vPb-OuBJPheeF_t2dCWVYqc8wZVh8gmYNPOpI78-RrZxCCK4NMDA=C8CBD7EB" \
             -H "Content-Type: application/json" \
             --data '{
              "fields": {
