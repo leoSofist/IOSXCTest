@@ -47,12 +47,24 @@ jobs:
       # Collect XML test results data to show in the UI, and save the same XML
       # files under test-results folder in the Artifacts tab
       - run:
-          name: Verificar problemas em aberto no Jira
+          name: Create Jira card
           command: |          
-            curl -X GET \
+            curl -X POST \
             -H "Authorization: Basic d34921814eea2176101598c7a24ff82f2f3dfda9" \
             -H "Content-Type: application/json" \
-            "https://leosofist.atlassian.net/rest/api/2/search?jql=project=TES and status!=Done"
+            --data '{
+             "fields": {
+              "project": {
+                "key": “TES"
+              },
+              "summary": "Issue created from CircleCI",
+              "description": "This issue was created automatically after a successful test run in CircleCI.",
+              "issuetype": {
+                 "name": "Task"
+              }
+            }
+            }' \
+            https://https://leosofist.atlassian.net/rest/api/3/issue
       
       - store_test_results:
           path: test_output
