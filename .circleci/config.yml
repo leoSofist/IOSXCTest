@@ -48,8 +48,11 @@ jobs:
       # files under test-results folder in the Artifacts tab
       - run:
           name: Verificar problemas em aberto no Jira
-          command: |
-            curl -X GET -H "Content-Type: application/json" -H "Authorization: Basic d34921814eea2176101598c7a24ff82f2f3dfda9""https://leosofist.atlassian.net/rest/api/2/search?jql=project=TES AND status=Open" 
+          command: |          
+            curl -X GET \
+            -H "Authorization: Basic d34921814eea2176101598c7a24ff82f2f3dfda9" \
+            -H "Content-Type: application/json" \
+            "https://leosofist.atlassian.net/rest/api/2/search?jql=project=TES and status!=Done"
       
       - store_test_results:
           path: test_output
