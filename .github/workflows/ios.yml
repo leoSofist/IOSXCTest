@@ -42,8 +42,16 @@ jobs:
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
           xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
-          
         
+      - name: Checkout do Código
+        uses: actions/checkout@v2
+      - name: Setup do Ambiente
+        run: |
+          xcodebuild -version
+          xcodebuild -showsdks
+          gem install bundler
+          bundle install
+          pip install xctest2testrail 
       - name: Build do Projeto
         run: xcodebuild -scheme LoginApp -workspace LoginApp.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' build test
       - name: Coletar Resultados dos Testes
