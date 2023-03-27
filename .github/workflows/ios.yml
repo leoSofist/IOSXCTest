@@ -42,25 +42,24 @@ jobs:
           if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
           xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
-        
-      - name: Python setup
-        if: always()
-        uses: actions/setup-python@v3
+          
+          
+      - name: Coletar Resultados dos Testes
+        uses: codecov/codecov-action@v2.1.0
         with:
-          python-version: '3.x'
-      - name: TestRail CLI upload results
-        if: always()
-        run: |
-          pip install trcli
-          junitparser merge --glob "reports/TEST-*" "reports/junit-report.xml"
-          trcli -y \
-            -h https://leotestsofist.testrail.io/ \
-            --project "testIOSIntegration" \
-            -u leonardo.almeida@sofist.co \
-            -p Am99820120* \
-            parse_junit \
-            --title "Automated Tests from GitHub workflow" \
-            --run-description ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} \
-            -f "junit-report.xml"
+          path: ./LoginApp.xcodeproj/xcov_report/*.xcresult
+          
+      - name: Enviar Resultados dos Testes para o TestRail
+        uses: yevheniir/testrail-reporter-action@v1.0.1
+        with:
+          testrail_base_url: https://leotestsofist.testrail.io/ 
+          testrail_username: leonardo.almeida@sofist.co
+          testrail_password: Am99820120*
+          testrail_project_id: 1
+          testrail_suite_id: 1
+          testrail_run_name: 'Testes do Projeto iOS'
+          testrail_results_path: './TestResults.xcresult'    
+        
+
           
           
