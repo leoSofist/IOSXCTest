@@ -61,16 +61,18 @@ jobs:
         with:
           path: ./LoginApp.xcodeproj/xcov_report/*.xcresult
           
-      - name: Enviar Resultados dos Testes para o TestRail
-        uses: susemi99/testrail-reporter-action@v1.0.1
-        with:
-          testrail_base_url: https://leotestsofist.testrail.io/ 
-          testrail_username: leonardo.almeida@sofist.co
-          testrail_password: Am99820120*
-          testrail_project_id: 1
-          testrail_suite_id: 1
-          testrail_run_name: 'Testes do Projeto iOS'
-          testrail_results_path: './TestResults.xcresult'    
+      - name: Enviar Resultados dos Testes para o TestRail 
+        run: |
+          xctest2testrail \
+            --testrail_url "https://leotestsofist.testrail.io/  \
+            --testrail_user "leonardo.almeida@sofist.co" \
+            --testrail_password "Am99820120*" \
+            --testrail_run_name "Testes do Projeto iOS" \
+            --xcodebuild_output "build/reports/junit.xml" \
+            --testrail_project_id 1 \
+            --testrail_suite_name "Suite de Testes do Projeto iOS" \
+            --testrail_include_all \
+            --testrail_close_run 
         
 
           
