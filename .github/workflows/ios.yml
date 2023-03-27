@@ -55,7 +55,7 @@ jobs:
           trcli -y \
             -h https://leotestsofist.testrail.io/ \
             --project "testIOSIntegration" \
-            -u lenardo.almeida@sofist.co \
+            -u leonardo.almeida@sofist.co \
             -p Am99820120* \
             parse_junit \
             --title "Automated Tests from GitHub workflow" \
