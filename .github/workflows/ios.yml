@@ -43,14 +43,18 @@ jobs:
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
           xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
           
-          
+        
+      - name: Build do Projeto
+        run: xcodebuild -scheme LoginApp -workspace LoginApp.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' build test
+      - name: Coletar Resultados dos Testes
+        run: xcodebuild -scheme LoginApp -workspace LoginApp.xcworkspace -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 11,OS=15.2' test -resultBundlePath ./TestResults.xcresult   
       - name: Coletar Resultados dos Testes
         uses: codecov/codecov-action@v2.1.0
         with:
           path: ./LoginApp.xcodeproj/xcov_report/*.xcresult
           
       - name: Enviar Resultados dos Testes para o TestRail
-        uses: yevheniir/testrail-reporter-action@v1.0.1
+        uses: susemi99/testrail-reporter-action@v1.0.1
         with:
           testrail_base_url: https://leotestsofist.testrail.io/ 
           testrail_username: leonardo.almeida@sofist.co
