@@ -52,6 +52,7 @@ jobs:
         if: always()
         run: |
           pip install trcli
+          junitparser merge --glob "reports/TEST-*" "reports/junit-report.xml"
           trcli -y \
             -h https://leotestsofist.testrail.io/ \
             --project "testIOSIntegration" \
