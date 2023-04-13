@@ -6,6 +6,7 @@ class TestBbdExample: SetupTestBase, Login, SingUp {
         givenThatIEnterMyData()
         whenIClickContinue()
         thenISeeTheLogin()
+        
     }
     
     func testSingUpWithSuccess() {
