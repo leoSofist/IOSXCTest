@@ -71,7 +71,7 @@ jobs:
           # This directory is where you have all your results locally, generally named as allure-results
           ALLURE_RESULTS_DIRECTORY='allure-results'
           # This url is where the Allure container is deployed. We are using localhost as an example
-          ALLURE_SERVER='http://63.135.169.88:5050'
+          ALLURE_SERVER='http://record.sofist.co:5050/'
           # Project ID according to existent projects in your Allure container - Check endpoint for project creation >> [POST]/projects
           PROJECT_ID='test-ios'
         shell: bash
