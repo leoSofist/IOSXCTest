@@ -48,14 +48,6 @@ jobs:
           file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
           xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"    
           
-          - name: Send Test Results to TestRail
-          run: |
-              curl -X POST -u $TESTRAIL_USERNAME:$TESTRAIL_APIKEY \
-                -H "Content-Type: application/json" \
-                -d @test_results.json \
-                "https://leotestsofist.testrail.io/index.php?/api/v2/add_results_for_cases/1"
-            if: always()
-
   
 
           
