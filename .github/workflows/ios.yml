@@ -54,7 +54,7 @@ jobs:
           # Resto do seu script de teste
       - name: go_to_file
         run: |
-          cd /Users/runner/Library/Developer/Xcode/DerivedData/LoginApp-dcixufbnfuhpwfhenzfyfyhfbdtm/Logs/Test/
+          cd /Users/runner/Library/Developer/Xcode/DerivedData/LoginApp-dcixufbnfuhpwfhenzfyfyhfbdtm/Logs/
 
       - name: Install Allure
         run: |
@@ -80,7 +80,7 @@ jobs:
         run: |
           DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
           
-          for file in "$DIR"/*.xcresult; do
+          for file in Test/*.xcresult; do
               ./xcresults export "$file" "$DIR/$ALLURE_RESULTS_DIRECTORY/$(basename "$file" .xcresult)"
           done
           
