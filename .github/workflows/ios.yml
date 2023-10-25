@@ -14,7 +14,6 @@ jobs:
   build:
     name: Build and Test default scheme using any available iPhone simulator
     runs-on: macos-latest
-    
 
     steps:
       - name: Checkout
@@ -30,27 +29,68 @@ jobs:
           scheme: ${{ 'default' }}
           platform: ${{ 'iOS Simulator' }}
         run: |
-          # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
-          device=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
-          if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
-          file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-          xcodebuild build-for-testing -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device"
+          # Resto do seu script de build
       - name: Test
         env:
           scheme: ${{ 'default' }}
           platform: ${{ 'iOS Simulator' }}
         run: |
-          # xcrun xctrace returns via stderr, not the expected stdout (see https://developer.apple.com/forums/thread/663959)
-          device=`xcrun xctrace list devices 2>&1 | grep -oE 'iPhone.*?[^\(]+' | head -1 | awk '{$1=$1;print}' | sed -e "s/ Simulator$//"`
-          if [ $scheme = default ]; then scheme=$(cat default); fi
-          if [ "`ls -A | grep -i \\.xcworkspace\$`" ]; then filetype_parameter="workspace" && file_to_build="`ls -A | grep -i \\.xcworkspace\$`"; else filetype_parameter="project" && file_to_build="`ls -A | grep -i \\.xcodeproj\$`"; fi
-          file_to_build=`echo $file_to_build | awk '{$1=$1;print}'`
-              # Define o diretório de destino
-                derivedDataPath="./build/derivedData"
-          xcodebuild test-without-building -scheme "$scheme" -"$filetype_parameter" "$file_to_build" -destination "platform=$platform,name=$device" -derivedDataPath "$derivedDataPath"
-          
-  
+          # Resto do seu script de teste
+      - name: go_to_file
+        run: |
+          cd /Users/runner/Library/Developer/Xcode/DerivedData/LoginApp-dcixufbnfuhpwfhenzfyfyhfbdtm/Logs/Test/
 
+      - name: Install Allure
+        run: |
+          brew install allure
+
+      - name: Download xcresults
+        run: |
+          DOWNLOAD_URL="https://github.com/eroshenkoam/xcresults/releases/download/1.13.1/xcresults"
+          curl -sL "${DOWNLOAD_URL}" -o ./xcresults
+          chmod +x ./xcresults
+
+      - name: Set Up Environment
+        run: |
+          # This directory is where you have all your results locally, generally named as allure-results
+          ALLURE_RESULTS_DIRECTORY='allure-results'
+          # This url is where the Allure container is deployed. We are using localhost as an example
+          ALLURE_SERVER='http://63.135.169.88:5050'
+          # Project ID according to existent projects in your Allure container - Check endpoint for project creation >> [POST]/projects
+          PROJECT_ID='test-ios'
+        shell: bash
+
+      - name: Execute Bash Script
+        run: |
+          DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd)"
           
+          for file in "$DIR"/*.xcresult; do
+              ./xcresults export "$file" "$DIR/$ALLURE_RESULTS_DIRECTORY/$(basename "$file" .xcresult)"
+          done
           
+          for subdirectory in "$DIR/$ALLURE_RESULTS_DIRECTORY"/*; do
+              if [ -d "$subdirectory" ]; then
+                  echo "Processing results in $subdirectory"
+          
+                  JSON_FILES_TO_SEND=$(find "$subdirectory" -type f -name "*.json")
+                  JPEG_FILES_TO_SEND=$(find "$subdirectory" -type f -name "*.jpeg")
+          
+                  if [ -z "$JSON_FILES_TO_SEND" ] && [ -z "$JPEG_FILES_TO_SEND" ]; then
+                      echo "No JSON or JPEG files to send in $subdirectory."
+                  else
+                      FILES=''
+                      for FILE in $JSON_FILES_TO_SEND $JPEG_FILES_TO_SEND; do
+                          FILES+="-F files[]=@$FILE "
+                      done
+          
+                      echo "------------------SEND-RESULTS------------------"
+                      curl -X POST "$ALLURE_SERVER/allure-docker-service/send-results?project_id=$PROJECT_ID&force_project_creation=true" -H 'Content-Type: multipart/form-data' $FILES -ik
+                      echo "------------------ END ------------------"
+                  fi
+              fi
+          done
+          
+          echo "------------------GENERATE-REPORT------------------"
+          curl -X GET "$ALLURE_SERVER/allure-docker-service/generate-report?project_id=$PROJECT_ID" -H 'Content-Type: multipart/form-data'
+          echo "------------------ END ------------------"
+        shell: bash
